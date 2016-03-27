@@ -21,12 +21,27 @@ BinarySearchTree.prototype.insert = function(value) {
   }
 };
 
-BinarySearchTree.prototype.contains = function() {
+BinarySearchTree.prototype.contains = function(value) {
+  if (this.value === value) {
+    return true;
+  }
+  if (this.left && value < this.value) {
+    return this.left.contains(value);
+  } else if (this.right) {
+    return this.right.contains(value);
+  }
 
+  return false;
 };
 
-BinarySearchTree.prototype.depthFirstLog = function() {
-
+BinarySearchTree.prototype.depthFirstLog = function(callback) {
+  callback(this.value);
+  if (this.left) {
+    this.left.depthFirstLog(callback);
+  }
+  if (this.right) {
+    this.right.depthFirstLog(callback);
+  }
 };
 
 
